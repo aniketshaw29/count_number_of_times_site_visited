@@ -1,25 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask,render_template  #importinf flask
 
-app = Flask(__name__)
+app = Flask(__name__) #magic variable main
+#creating the Flask class object   
 
-@app.route("/")
-def index():
-    
-    # Load current count
-    f = open("count.txt", "r")
-    count = int(f.read())
-    f.close()
+@app.route('/')     #decorator
+def home():
+    return render_template('home.html')
 
-    # Increment the count
-    count += 1
+@app.route('/signup.html')     #decorator
+def signup():
+    return render_template('signup.html')
 
-    # Overwrite the count
-    f = open("count.txt", "w")
-    f.write(str(count))
-    f.close()
+@app.route('/login.html')     #decorator
+def login():
+    return render_template('login.html')
 
-    # Render HTML with count variable
-    return render_template("index.html", count=count)
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()
